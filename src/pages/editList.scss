@@ -1,19 +1,20 @@
-.edit-task {
+@charset "utf-8";
+
+.edit-list {
   width: 1000px;
   margin: 0 auto;
 }
 
-.edit-task-form {
+.edit-list-form {
   color: #555555;
 }
 
-.edit-task-title,
-.edit-task-detail {
+.edit-list-title {
   width: 300px;
   margin-bottom: 25px;
 }
 
-.delete-task-button {
+.delete-list-button {
   color: #ff3333;
   border: solid 1px #ff3333;
   width: 80px;
@@ -22,7 +23,7 @@
   border-radius: 5px;
 }
 
-.edit-task-button {
+.edit-list-button {
   background-color: #242f9b;
   color: #ffffff;
   width: 80px;
@@ -32,4 +33,4 @@
 
 .error-message {
   color: #ff3333;
-}/*# sourceMappingURL=editTask.css.map */
+}
