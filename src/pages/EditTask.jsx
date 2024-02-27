@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { url } from '../const';
 import { useNavigate, useParams } from 'react-router-dom';
-import './editTask.css';
+import './editTask.scss';
 
 export const EditTask = () => {
   const navigate = useNavigate();
@@ -12,10 +12,12 @@ export const EditTask = () => {
   const [cookies] = useCookies();
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
+  const [limit, setLimit] = useState('');
   const [isDone, setIsDone] = useState();
   const [errorMessage, setErrorMessage] = useState('');
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
+  const handleLimitChange = (e) => setLimit(e.target.value);
   const handleIsDoneChange = (e) => setIsDone(e.target.value === 'done');
   const onUpdateTask = () => {
     console.log(isDone);
@@ -23,6 +25,7 @@ export const EditTask = () => {
       title: title,
       detail: detail,
       done: isDone,
+      limit: limit + ':00Z',
     };
 
     axios
@@ -33,7 +36,7 @@ export const EditTask = () => {
       })
       .then((res) => {
         console.log(res.data);
-        navigate.push('/');
+        navigate('/');
       })
       .catch((err) => {
         setErrorMessage(`更新に失敗しました。${err}`);
@@ -48,7 +51,7 @@ export const EditTask = () => {
         },
       })
       .then(() => {
-        navigate.push('/');
+        navigate('/');
       })
       .catch((err) => {
         setErrorMessage(`削除に失敗しました。${err}`);
@@ -67,6 +70,7 @@ export const EditTask = () => {
         setTitle(task.title);
         setDetail(task.detail);
         setIsDone(task.done);
+        setLimit(task.limit.slice(0, -4));
       })
       .catch((err) => {
         setErrorMessage(`タスク情報の取得に失敗しました。${err}`);
@@ -87,6 +91,15 @@ export const EditTask = () => {
             onChange={handleTitleChange}
             className="edit-task-title"
             value={title}
+          />
+          <br />
+          <label>期限</label>
+          <br />
+          <input
+            type="datetime-local"
+            onChange={handleLimitChange}
+            className="edit-task-limit"
+            value={limit}
           />
           <br />
           <label>詳細</label>

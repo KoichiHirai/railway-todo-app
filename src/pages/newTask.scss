@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+@mixin textbox{
+  width: 300px;
+  margin-bottom: 25px;
+}
+
 .new-task {
   width: 1000px;
   margin: 0 auto;
@@ -11,12 +16,12 @@
 
 .new-task-select-list,
 .new-task-title,
-.new-task-detail {
-  width: 300px;
-  margin-bottom: 25px;
+.new-task-limit{
+  @include textbox;
 }
 
 .new-task-detail {
+  @include textbox;
   height: 200px;
 }
 

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Header } from '../components/Header';
 import { url } from '../const';
 import PropTypes from 'prop-types';
-import './home.css';
+import './home.scss';
 
 export const Home = () => {
   const [isDoneDisplay, setIsDoneDisplay] = useState('todo'); // todo->未完了 done->完了
@@ -126,7 +126,19 @@ export const Home = () => {
 // 表示するタスク
 const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props;
+  const today = new Date();
+
   if (tasks === null) return <></>;
+  console.log('置き換え前');
+  console.log(tasks);
+  tasks.map((task) => {
+    const date = new Date(task.limit);
+    date.setTime(date.getTime() - 9 * 3600 * 1000); //扱っている時間が標準時なので、標準時に戻す
+    task.limit = date;
+    return task.limit;
+  });
+  console.log('置き換え後');
+  console.log(tasks);
 
   if (isDoneDisplay == 'done') {
     return (
@@ -142,6 +154,19 @@ const Tasks = (props) => {
                 className="task-item-link"
               >
                 {task.title}
+                <br />
+                {`期限: ${task.limit.getFullYear()}年
+                  ${`${task.limit.getMonth() + 1}`.replace(/^0/, '')}月
+                  ${`${task.limit.getDate()}`.replace(/^0/, '')}日
+                  ${`${task.limit.getHours()}`.replace(/^0/, '')}時
+                  ${`${task.limit.getMinutes()}`.replace(/^0/, '')}分`}
+                （
+                {task.limit - today >= 0
+                  ? `期限まで残り${Math.floor((task.limit - today) / (1000 * 60 * 60 * 24))}日
+                  ${Math.floor(((task.limit - today) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}時間
+                  ${Math.floor(((task.limit - today) % (1000 * 60 * 60)) / (1000 * 60))}分`
+                  : '期限を超過してます'}
+                ）
                 <br />
                 {task.done ? '完了' : '未完了'}
               </Link>
@@ -164,6 +189,19 @@ const Tasks = (props) => {
               className="task-item-link"
             >
               {task.title}
+              <br />
+              {`期限: ${task.limit.getFullYear()}年
+                ${`${task.limit.getMonth() + 1}`.replace(/^0/, '')}月
+                ${`${task.limit.getDate()}`.replace(/^0/, '')}日
+                ${`${task.limit.getHours()}`.replace(/^0/, '')}時
+                ${`${task.limit.getMinutes()}`.replace(/^0/, '')}分`}
+              （
+              {task.limit - today >= 0
+                ? `期限まで残り${Math.floor((task.limit - today) / (1000 * 60 * 60 * 24))}日
+                ${Math.floor(((task.limit - today) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}時間
+                ${Math.floor(((task.limit - today) % (1000 * 60 * 60)) / (1000 * 60))}分`
+                : '期限を超過してます'}
+              ）
               <br />
               {task.done ? '完了' : '未完了'}
             </Link>
