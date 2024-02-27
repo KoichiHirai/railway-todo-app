@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { Header } from '../components/Header';
 import { url } from '../const';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './home.scss';
 
 export const Home = () => {
@@ -211,8 +211,8 @@ const Tasks = (props) => {
   );
 };
 
-Tasks.propTypes = {
-  tasks: PropTypes.array, // tasks が配列であることを指定
-  selectListId: PropTypes.string, // selectListId が文字列であることを指定
-  isDoneDisplay: PropTypes.string, // isDoneDisplay がブール値であることを指定
-};
+// Tasks.propTypes = {
+//   tasks: PropTypes.array, // tasks が配列であることを指定
+//   selectListId: PropTypes.string, // selectListId が文字列であることを指定
+//   isDoneDisplay: PropTypes.string, // isDoneDisplay がブール値であることを指定
+// };
