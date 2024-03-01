@@ -15,6 +15,11 @@ export const Home = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [cookies] = useCookies();
   const handleIsDoneDisplayChange = (e) => setIsDoneDisplay(e.target.value);
+  const handleEnterKey = (e, id) => {
+    if (e.key === 'Enter') {
+      handleSelectList(id);
+    }
+  };
   useEffect(() => {
     axios
       .get(`${url}/lists`, {
@@ -88,9 +93,11 @@ export const Home = () => {
               const isActive = list.id === selectListId;
               return (
                 <li
+                  tabIndex="0"
                   key={key}
                   className={`list-tab-item ${isActive ? 'active' : ''}`}
                   onClick={() => handleSelectList(list.id)}
+                  onKeyDown={(event) => handleEnterKey(event, list.id)}
                 >
                   {list.title}
                 </li>
@@ -129,16 +136,12 @@ const Tasks = (props) => {
   const today = new Date();
 
   if (tasks === null) return <></>;
-  console.log('置き換え前');
-  console.log(tasks);
   tasks.map((task) => {
     const date = new Date(task.limit);
     date.setTime(date.getTime() - 9 * 3600 * 1000); //扱っている時間が標準時なので、標準時に戻す
     task.limit = date;
     return task.limit;
   });
-  console.log('置き換え後');
-  console.log(tasks);
 
   if (isDoneDisplay == 'done') {
     return (
