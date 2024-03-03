@@ -8,14 +8,42 @@
   display: flex;
   justify-content: space-between;
   h1{
-    margin: auto 0px auto 25px;
+    margin: auto 0px auto 48px;
+    
     .header-title{
       text-decoration: none;
       color: #ffffff;
     }
+
+    @media screen and (max-width: 768px){
+      margin: auto 0px auto 24px;
+    }
+
+    @media screen and (max-width: 320px){
+      margin: auto 0px auto 16px;
+    }
   }
+
   .sign-out-button {
     color: #ffffff;
-    margin: auto 25px auto 0px;
+    margin: auto 48px auto 0px;
+
+    @media screen and (max-width: 768px){
+      margin: auto 24px auto 0px;
+    }
+
+    @media screen and (max-width: 320px){
+      margin: auto 16px auto 0px;
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    // margin: 50px 24px;
+    // width: calc(100% - 48px);
+  }
+
+  @media screen and (max-width: 320px){
+    font-size: small;
+    height: 64px;
   }
 }

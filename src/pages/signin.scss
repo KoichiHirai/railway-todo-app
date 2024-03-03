@@ -4,8 +4,20 @@ $btn-color: #242f9b;
 $error-color: #ff3333;
 
 .signin {
-  width: 500px;
-  margin: 0 auto;
+  max-width: 500px;
+  margin: 50px auto;
+
+  @media screen and (max-width: 768px){
+    max-width: 288px;
+    margin: 50px auto;
+    // width: calc(100% - 48px);
+  }
+
+  @media screen and (max-width: 320px){
+    margin: 50px 16px;
+    // width: calc(100% - 32px);
+    font-size: small;
+  }
 }
 
 .signin-form {
@@ -31,11 +43,22 @@ $error-color: #ff3333;
   width: 100px;
   height: 40px;
   border-radius: 5px;
+  
   &:hover{
     opacity: 0.7;
+  }
+
+  @media screen and (max-width: 320px){
+    width: 100%;
   }
 }
 
 .error-message {
   color: $error-color;
+}
+
+.new-link{
+  @media screen and (max-width: 320px){
+    text-align: center;
+  }
 }

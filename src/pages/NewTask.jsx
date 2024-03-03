@@ -63,52 +63,54 @@ export const NewTask = () => {
       <main className="new-task">
         <h2>タスク新規作成</h2>
         <p className="error-message">{errorMessage}</p>
-        <form className="new-task-form">
-          <label>リスト</label>
-          <br />
-          <select
-            onChange={(e) => handleSelectList(e.target.value)}
-            className="new-task-select-list"
-          >
-            {lists.map((list, key) => (
-              <option key={key} className="list-item" value={list.id}>
-                {list.title}
-              </option>
-            ))}
-          </select>
-          <br />
-          <label>タイトル</label>
-          <br />
-          <input
-            type="text"
-            onChange={handleTitleChange}
-            className="new-task-title"
-          />
-          <br />
-          <label>期限</label>
-          <br />
-          <input
-            type="datetime-local"
-            onChange={handleLimitChange}
-            className="new-task-limit"
-          />
-          <br />
-          <label>詳細</label>
-          <br />
-          <textarea
-            type="text"
-            onChange={handleDetailChange}
-            className="new-task-detail"
-          />
-          <br />
-          <button
-            type="button"
-            className="new-task-button"
-            onClick={onCreateTask}
-          >
-            作成
-          </button>
-        </form>
+        <div className="input-container">
+          <form className="new-task-form">
+            <label>リスト</label>
+            <br />
+            <select
+              onChange={(e) => handleSelectList(e.target.value)}
+              className="new-task-select-list"
+            >
+              {lists.map((list, key) => (
+                <option key={key} className="list-item" value={list.id}>
+                  {list.title}
+                </option>
+              ))}
+            </select>
+            <br />
+            <label>タイトル</label>
+            <br />
+            <input
+              type="text"
+              onChange={handleTitleChange}
+              className="new-task-title"
+            />
+            <br />
+            <label>期限</label>
+            <br />
+            <input
+              type="datetime-local"
+              onChange={handleLimitChange}
+              className="new-task-limit"
+            />
+            <br />
+            <label>詳細</label>
+            <br />
+            <textarea
+              type="text"
+              onChange={handleDetailChange}
+              className="new-task-detail"
+            />
+            <br />
+            <button
+              type="button"
+              className="new-task-button"
+              onClick={onCreateTask}
+            >
+              作成
+            </button>
+          </form>
+        </div>
       </main>
     </div>
   );

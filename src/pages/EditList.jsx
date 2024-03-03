@@ -72,12 +72,14 @@ export const EditList = () => {
         <form className="edit-list-form">
           <label>タイトル</label>
           <br />
-          <input
-            type="text"
-            className="edit-list-title"
-            value={title}
-            onChange={handleTitleChange}
-          />
+          <div className="input-container">
+            <input
+              type="text"
+              className="edit-list-title"
+              value={title}
+              onChange={handleTitleChange}
+            />
+          </div>
           <br />
           <button
             type="button"
