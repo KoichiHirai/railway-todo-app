@@ -150,31 +150,35 @@ const Tasks = (props) => {
           .filter((task) => {
             return task.done === true;
           })
-          .map((task, key) => (
-            <li key={key} className="task-item">
-              <Link
-                to={`/lists/${selectListId}/tasks/${task.id}`}
-                className="task-item-link"
-              >
-                {task.title}
-                <br />
-                {`期限: ${task.limit.getFullYear()}年
-                  ${`${task.limit.getMonth() + 1}`.replace(/^0/, '')}月
-                  ${`${task.limit.getDate()}`.replace(/^0/, '')}日
-                  ${`${task.limit.getHours()}`.replace(/^0/, '')}時
-                  ${`${task.limit.getMinutes()}`.replace(/^0/, '')}分`}
-                （
-                {task.limit - today >= 0
-                  ? `期限まで残り${Math.floor((task.limit - today) / (1000 * 60 * 60 * 24))}日
-                  ${Math.floor(((task.limit - today) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}時間
-                  ${Math.floor(((task.limit - today) % (1000 * 60 * 60)) / (1000 * 60))}分`
-                  : '期限を超過してます'}
-                ）
-                <br />
-                {task.done ? '完了' : '未完了'}
-              </Link>
-            </li>
-          ))}
+          .map((task, key) => {
+            const taskLimit = task.limit;
+            const diffLimit = taskLimit - today;
+            return (
+              <li key={key} className="task-item">
+                <Link
+                  to={`/lists/${selectListId}/tasks/${task.id}`}
+                  className="task-item-link"
+                >
+                  {task.title}
+                  <br />
+                  {`期限: ${taskLimit.getFullYear()}年
+                    ${`${taskLimit.getMonth() + 1}`.replace(/^0/, '')}月
+                    ${`${taskLimit.getDate()}`.replace(/^0/, '')}日
+                    ${`${taskLimit.getHours()}`.replace(/^0/, '')}時
+                    ${`${taskLimit.getMinutes()}`.replace(/^0/, '')}分`}
+                  （
+                  {diffLimit >= 0
+                    ? `期限まで残り${Math.floor(diffLimit / (1000 * 60 * 60 * 24))}日
+                    ${Math.floor((diffLimit % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}時間
+                    ${Math.floor((diffLimit % (1000 * 60 * 60)) / (1000 * 60))}分`
+                    : '期限を超過してます'}
+                  ）
+                  <br />
+                  {task.done ? '完了' : '未完了'}
+                </Link>
+              </li>
+            );
+          })}
       </ul>
     );
   }
@@ -185,37 +189,35 @@ const Tasks = (props) => {
         .filter((task) => {
           return task.done === false;
         })
-        .map((task, key) => (
-          <li key={key} className="task-item">
-            <Link
-              to={`/lists/${selectListId}/tasks/${task.id}`}
-              className="task-item-link"
-            >
-              {task.title}
-              <br />
-              {`期限: ${task.limit.getFullYear()}年
-                ${`${task.limit.getMonth() + 1}`.replace(/^0/, '')}月
-                ${`${task.limit.getDate()}`.replace(/^0/, '')}日
-                ${`${task.limit.getHours()}`.replace(/^0/, '')}時
-                ${`${task.limit.getMinutes()}`.replace(/^0/, '')}分`}
-              （
-              {task.limit - today >= 0
-                ? `期限まで残り${Math.floor((task.limit - today) / (1000 * 60 * 60 * 24))}日
-                ${Math.floor(((task.limit - today) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}時間
-                ${Math.floor(((task.limit - today) % (1000 * 60 * 60)) / (1000 * 60))}分`
-                : '期限を超過してます'}
-              ）
-              <br />
-              {task.done ? '完了' : '未完了'}
-            </Link>
-          </li>
-        ))}
+        .map((task, key) => {
+          const taskLimit = task.limit;
+          const diffLimit = taskLimit - today;
+          return (
+            <li key={key} className="task-item">
+              <Link
+                to={`/lists/${selectListId}/tasks/${task.id}`}
+                className="task-item-link"
+              >
+                {task.title}
+                <br />
+                {`期限: ${taskLimit.getFullYear()}年
+                  ${`${taskLimit.getMonth() + 1}`.replace(/^0/, '')}月
+                  ${`${taskLimit.getDate()}`.replace(/^0/, '')}日
+                  ${`${taskLimit.getHours()}`.replace(/^0/, '')}時
+                  ${`${taskLimit.getMinutes()}`.replace(/^0/, '')}分`}
+                （
+                {diffLimit >= 0
+                  ? `期限まで残り${Math.floor(diffLimit / (1000 * 60 * 60 * 24))}日
+                  ${Math.floor((diffLimit % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}時間
+                  ${Math.floor((diffLimit % (1000 * 60 * 60)) / (1000 * 60))}分`
+                  : '期限を超過してます'}
+                ）
+                <br />
+                {task.done ? '完了' : '未完了'}
+              </Link>
+            </li>
+          );
+        })}
     </ul>
   );
 };
-
-// Tasks.propTypes = {
-//   tasks: PropTypes.array, // tasks が配列であることを指定
-//   selectListId: PropTypes.string, // selectListId が文字列であることを指定
-//   isDoneDisplay: PropTypes.string, // isDoneDisplay がブール値であることを指定
-// };
